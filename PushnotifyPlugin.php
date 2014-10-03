@@ -209,6 +209,13 @@ class PushnotifyPlugin extends Plugin {
         switch ($service) {
             case 'pushalot':
                 require_once $libdir . '/pushalot_api.php';
+                // Because Pushalot does not speak UTF-8, do conversions
+                common_debug(LOG_DEBUG, 'Converting body string from ' . mb_detect_encoding($body, mb_detect_order(), true) . ' to Windows-1252.');
+                $body = iconv(mb_detect_encoding($body, mb_detect_order(), true), "Windows-1252", $body);
+                common_debug(LOG_DEBUG, 'Converting subject string from ' . mb_detect_encoding($subject, mb_detect_order(), true) . ' to Windows-1252.');
+                $subject = iconv(mb_detect_encoding($body, mb_detect_order(), true), "Windows-1252", $subject);
+                common_debug(LOG_DEBUG, 'Converting title string from ' . mb_detect_encoding($title, mb_detect_order(), true) . ' to Windows-1252.');
+                $title = iconv(mb_detect_encoding($body, mb_detect_order(), true), "Windows-1252", $title);
 
                 $pushalot = new Pushalot($curPrefs->apikey);
                 //$pushalot->setProxy('http://localhost:12345','user:pass');
@@ -226,7 +233,7 @@ class PushnotifyPlugin extends Plugin {
                     common_debug(LOG_DEBUG, 'Pushalot notifcation sent.');
                 }
                 else {
-                    common_debug(LOG_INFO, $pushalot->getError());
+                    common_debug(LOG_ERR, $pushalot->getError());
                 }
                 break;
 
@@ -238,6 +245,9 @@ class PushnotifyPlugin extends Plugin {
                 if($nma->verify()) {
                     if($nma->notify($title, $subject, $body)) {
                         common_debug(LOG_DEBUG, 'NMA notifcation sent.');
+                    }
+                    else {
+                        common_debug(LOG_ERR, 'NMA notification not sent.');
                     }
                 }
                 break;
