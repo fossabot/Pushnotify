@@ -125,7 +125,6 @@ class PushnotifyPlugin extends Plugin {
      * @param array  &$mentioned_ids    List of profiles (from $stored->getReplies())
      */
     public function onStartNotifyMentioned(Notice $stored, array &$mentioned_ids) {
-        common_debug(LOG_DEBUG, var_dump($stored));
         $verb = explode('/', $stored->verb);
         common_debug(LOG_DEBUG, '###########'.end($verb).'############');
         foreach ($mentioned_ids as $id) {
