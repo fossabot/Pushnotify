@@ -77,15 +77,15 @@ class PushnotifysettingsAction extends SettingsAction {
         $pa_array = array('type' => 'radio', 'name' => 'service', 'value' => 'pushalot');
 
         switch ($prefs->service) {
-        	case 'nma':
-        		$nma_array['checked'] = 'checked';
-        		break;
-        	case 'pushalot':
-        		$pa_array['checked'] = 'checked';
-        		break;
+            case 'nma':
+                $nma_array['checked'] = 'checked';
+                break;
+            case 'pushalot':
+                $pa_array['checked'] = 'checked';
+                break;
 
-        	default:
-        		break;
+            default:
+                break;
         }
 
         $this->elementStart('form', array('method' => 'post',
@@ -107,16 +107,12 @@ class PushnotifysettingsAction extends SettingsAction {
                 $this->elementEnd('fieldset');
                 $this->elementStart('fieldset', array('class' => 'settings_push_preferences'));
                     $this->element('legend', null, _m('LEGEND','Service'));
-                    $this->elementStart('ul');
+                    $this->elementStart('ul', 'form_data');
                         $this->elementStart('li');
-                            $this->elementStart('ul', 'form_data');
-                                $this->elementStart('li');
-                                    $this->element('input', $pa_array, _m('Pushalot'));
-                                $this->elementEnd('li');
-                                $this->elementStart('li');
-                                    $this->element('input', $nma_array, _m('NotifyMyAndroid'));
-                                $this->elementEnd('li');
-                            $this->elementEnd('ul');
+                            $this->element('input', $pa_array, _m('Pushalot'));
+                        $this->elementEnd('li');
+                        $this->elementStart('li');
+                            $this->element('input', $nma_array, _m('NotifyMyAndroid'));
                         $this->elementEnd('li');
 
                         /*
