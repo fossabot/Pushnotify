@@ -77,7 +77,19 @@ class PushnotifyPlugin extends Plugin {
     }
 
     /**
-     * Menu item for OpenID settings
+     * Show the CSS necessary for this plugin
+     *
+     * @param Action $action the action being run
+     *
+     * @return boolean hook value
+     */
+    function onEndShowStyles($action) {
+        $action->cssLink($this->path('css/pushnotify.css'));
+        return true;
+    }
+
+    /**
+     * Menu item for push notify settings
      *
      * @param Action $action Action being executed
      *
@@ -210,11 +222,17 @@ class PushnotifyPlugin extends Plugin {
                 require_once $libdir . '/pushalot_api.php';
                 // Because Pushalot does not speak UTF-8, do conversions
                 common_debug(LOG_DEBUG, 'Converting body string from ' . mb_detect_encoding($body, mb_detect_order(), true) . ' to Windows-1252.');
-                $body = iconv(mb_detect_encoding($body, mb_detect_order(), true), "Windows-1252", $body);
+                $_body = iconv(mb_detect_encoding($body, mb_detect_order(), true) . '//TRANSLIT', "Windows-1252", $body);
                 common_debug(LOG_DEBUG, 'Converting subject string from ' . mb_detect_encoding($subject, mb_detect_order(), true) . ' to Windows-1252.');
-                $subject = iconv(mb_detect_encoding($body, mb_detect_order(), true), "Windows-1252", $subject);
+                $_subject = iconv(mb_detect_encoding($subject, mb_detect_order(), true) . '//TRANSLIT', "Windows-1252", $subject);
                 common_debug(LOG_DEBUG, 'Converting title string from ' . mb_detect_encoding($title, mb_detect_order(), true) . ' to Windows-1252.');
-                $title = iconv(mb_detect_encoding($body, mb_detect_order(), true), "Windows-1252", $title);
+                $_title = iconv(mb_detect_encoding($title, mb_detect_order(), true) . '//TRANSLIT', "Windows-1252", $title);
+
+                common_debug(LOG_DEBUG, 'Title: ' . print_r($_title));
+
+                $title = ( $_title != false ? $_title : $title );
+                $subject = ( $_subject != false ? $_subject : $subject );
+                $body = ( $_body == false ? $_body : $body );
 
                 $pushalot = new Pushalot($curPrefs->apikey);
                 //$pushalot->setProxy('http://localhost:12345','user:pass');

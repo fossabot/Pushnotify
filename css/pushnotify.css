@@ -1,0 +1,14 @@
+.form_settings fieldset fieldset {
+	margin: 10px;
+	padding: 10px;
+	padding-top: 30px;
+	border-width: 1px;
+	border-style: solid;
+	background: rgba(240, 240, 240, 0.2);
+}
+
+.form_settings .form_data li {
+	width: 100%;
+	float: left;
+	margin-bottom: 5px;
+}

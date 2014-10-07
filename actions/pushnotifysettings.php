@@ -93,59 +93,62 @@ class PushnotifysettingsAction extends SettingsAction {
                                           'class' => 'form_settings',
                                           'action' => common_local_url('pushnotifysettings')
                                          )
-        					);
+                            );
 
 
-        $this->elementStart('fieldset', array('class' => 'settings_push_preferences'));
-	        $this->elementStart('ul');
-		        $this->element('legend', null, _m('LEGEND','Preferences'));
-		        $this->elementStart('ul', 'form_data');
-                $this->elementStart('li');
-			        $this->checkBox('enabled', "Enable/disable push notifications", !empty($prefs) && $prefs->enabled);
-		        $this->elementEnd('li');
-                $this->elementStart('li');
-		        	$this->elementStart('ul', 'form_data');
-		        		$this->elementStart('li');
-                			$this->element('input', $pa_array, _m('Pushalot'));
-                		$this->elementEnd('li');
-		        		$this->elementStart('li');
-                			$this->element('input', $nma_array, _m('NotifyMyAndroid'));
-                		$this->elementEnd('li');
-			        $this->elementEnd('ul');
-		        $this->elementEnd('li');
+            $this->elementStart('fieldset', array('class' => 'settings_push_preferences'));
+                $this->elementStart('fieldset', array('class' => 'settings_push_preferences'));
+                    $this->element('legend', null, _m('LEGEND','Enable/Disable'));
+                    $this->elementStart('ul');
+                        $this->elementStart('li');
+                            $this->checkBox('enabled', "Enable/disable push notifications", !empty($prefs) && $prefs->enabled);
+                        $this->elementEnd('li');
+                    $this->elementEnd('ul');
+                $this->elementEnd('fieldset');
+                $this->elementStart('fieldset', array('class' => 'settings_push_preferences'));
+                    $this->element('legend', null, _m('LEGEND','Service'));
+                    $this->elementStart('ul');
+                        $this->elementStart('li');
+                            $this->elementStart('ul', 'form_data');
+                                $this->elementStart('li');
+                                    $this->element('input', $pa_array, _m('Pushalot'));
+                                $this->elementEnd('li');
+                                $this->elementStart('li');
+                                    $this->element('input', $nma_array, _m('NotifyMyAndroid'));
+                                $this->elementEnd('li');
+                            $this->elementEnd('ul');
+                        $this->elementEnd('li');
 
-		        /*
-		        * // First implementations for pushover. It needs a username and token
-                * $this->elementStart('li');
-		        *    $this->element('label', array('for' => 'push_apiuser'),
-		        *                   _m('API User'));
-		        *    $this->element('input', array('name' => 'push_apiuser',
-		        *                                  'type' => 'text',
-		        *                                  'id' => 'push_apiuser',
-		        *                                  'value' => $prefs->apiuser));
-		        * $this->elementEnd('li');
-		        */
-				
-                $this->elementStart('li');
-		            $this->element('label', array('for' => 'push_apikey'),
-		                           _m('API Key/Token'));
-		            $this->element('input', array('name' => 'push_apikey',
-		                                          'type' => 'text',
-		                                          'id' => 'push_apikey',
-		                                          'value' => $prefs->apikey));
-		        $this->elementEnd('li');
-                $this->elementStart('li');
-			        $this->element('input', array('type' => 'submit',
-			                                      'id' => 'settings_pushnotify_prefs_save',
-			                                      'name' => 'save_prefs',
-			                                      'class' => 'submit',
-			                                      'value' => _m('BUTTON','Save')));
-		        $this->elementEnd('li');
-	        $this->elementEnd('ul');
-
-
-        $this->elementEnd('fieldset');
-
+                        /*
+                        * // First implementations for pushover. It needs a username and token
+                        * $this->elementStart('li');
+                        *    $this->element('label', array('for' => 'push_apiuser'),
+                        *                   _m('API User'));
+                        *    $this->element('input', array('name' => 'push_apiuser',
+                        *                                  'type' => 'text',
+                        *                                  'id' => 'push_apiuser',
+                        *                                  'value' => $prefs->apiuser));
+                        * $this->elementEnd('li');
+                        */
+                        
+                        $this->elementStart('li');
+                            $this->element('label', array('for' => 'push_apikey'),
+                                           _m('API Key/Token'));
+                            $this->element('input', array('name' => 'push_apikey',
+                                                          'type' => 'text',
+                                                          'id' => 'push_apikey',
+                                                          'value' => $prefs->apikey));
+                        $this->elementEnd('li');
+                        $this->elementStart('li');
+                            $this->element('input', array('type' => 'submit',
+                                                          'id' => 'settings_pushnotify_prefs_save',
+                                                          'name' => 'save_prefs',
+                                                          'class' => 'submit',
+                                                          'value' => _m('BUTTON','Save')));
+                        $this->elementEnd('li');
+                    $this->elementEnd('ul');
+                $this->elementEnd('fieldset');
+            $this->elementEnd('fieldset');
         $this->elementEnd('form');
 
 
