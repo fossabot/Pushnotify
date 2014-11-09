@@ -279,9 +279,13 @@ class PushnotifyPlugin extends Plugin {
                 if( strlen($curPrefs->devicename) > 0 ) {
                     $push->setDevice($curPrefs->devicename);
                 }
-                $push->setPriority(0);
                 $push->setTimestamp(time());
-                $go = $push->send();
+                if ($go = $push->send()) {
+                  common_debug(LOG_DEBUG, 'Pushover notifcation sent.');
+                }
+                else {
+                  common_debug(LOG_ERR, 'Pushover notification not sent.');
+                }
                 break;
 
             default:
