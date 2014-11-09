@@ -270,7 +270,18 @@ class PushnotifyPlugin extends Plugin {
                 break;
 
             case 'pushover':
-                common_debug(LOG_ERR, 'Pushover not yet implemented');
+                require_once $libdir . '/pushover.class.php';
+                $push = new Pushover();
+                $push->setToken($curPrefs->apikey);
+                $push->setUser($curPrefs->apiuser);
+                $push->setTitle($title);
+                $push->setMessage($body);
+                if( strlen($curPrefs->devicename) > 0 ) {
+                    $push->setDevice($curPrefs->devicename);
+                }
+                $push->setPriority(0);
+                $push->setTimestamp(time());
+                $go = $push->send();
                 break;
 
             default:

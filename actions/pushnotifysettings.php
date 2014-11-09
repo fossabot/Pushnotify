@@ -75,6 +75,7 @@ class PushnotifysettingsAction extends SettingsAction {
         $prefs = User_pushnotify_prefs::getKV('user_id', $user->id);
         $nma_array = array('type' => 'radio', 'name' => 'service', 'value' => 'nma');
         $pa_array = array('type' => 'radio', 'name' => 'service', 'value' => 'pushalot');
+        $po_array = array('type' => 'radio', 'name' => 'service', 'value' => 'pushover');
 
         switch ($prefs->service) {
             case 'nma':
@@ -82,6 +83,9 @@ class PushnotifysettingsAction extends SettingsAction {
                 break;
             case 'pushalot':
                 $pa_array['checked'] = 'checked';
+                break;
+            case 'pushover':
+                $po_array['checked'] = 'checked';
                 break;
 
             default:
@@ -114,18 +118,21 @@ class PushnotifysettingsAction extends SettingsAction {
                         $this->elementStart('li');
                             $this->element('input', $nma_array, _m('NotifyMyAndroid'));
                         $this->elementEnd('li');
+                        $this->elementStart('li');
+                            $this->element('input', $po_array, _m('Pushover'));
+                        $this->elementEnd('li');
 
-                        /*
-                        * // First implementations for pushover. It needs a username and token
-                        * $this->elementStart('li');
-                        *    $this->element('label', array('for' => 'push_apiuser'),
-                        *                   _m('API User'));
-                        *    $this->element('input', array('name' => 'push_apiuser',
-                        *                                  'type' => 'text',
-                        *                                  'id' => 'push_apiuser',
-                        *                                  'value' => $prefs->apiuser));
-                        * $this->elementEnd('li');
-                        */
+                        
+                        // First implementations for pushover. It needs a username and token
+                        $this->elementStart('li');
+                           $this->element('label', array('for' => 'push_apiuser'),
+                                          _m('API User*'));
+                           $this->element('input', array('name' => 'push_apiuser',
+                                                         'type' => 'text',
+                                                         'id' => 'push_apiuser',
+                                                         'value' => $prefs->apiuser));
+                        $this->elementEnd('li');
+                        
                         
                         $this->elementStart('li');
                             $this->element('label', array('for' => 'push_apikey'),
@@ -135,6 +142,17 @@ class PushnotifysettingsAction extends SettingsAction {
                                                           'id' => 'push_apikey',
                                                           'value' => $prefs->apikey));
                         $this->elementEnd('li');
+                        $this->elementStart('li');
+                            $this->element('label', array('for' => 'push_devicename'),
+                                           _m('Devicename'));
+                            $this->element('input', array('name' => 'push_devicename',
+                                                          'type' => 'text',
+                                                          'id' => 'push_devicename',
+                                                          'value' => $prefs->devicename));
+                        $this->elementEnd('li');
+                        $this->element('p', 'form_guide',
+                                     // TRANS: Form guide.
+                                     _m('* If not needed, keep it empty.'));
                         $this->elementStart('li');
                             $this->element('input', array('type' => 'submit',
                                                           'id' => 'settings_pushnotify_prefs_save',

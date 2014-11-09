@@ -64,7 +64,7 @@ class User_pushnotify_prefs extends Managed_DataObject
     public static function schemaDef()
     {
         return array(
-                     'description' => 'Per-user preferences for OpenID display',
+                     'description' => 'Per-user preferences for push notify',
                      'fields' => array('user_id'      => array('type' => 'integer',
                                                             'not null' => true,
                                                             'description' => 'User whose prefs we are saving'),
@@ -82,11 +82,16 @@ class User_pushnotify_prefs extends Managed_DataObject
                                                             'not null' => true, 
                                                             'default' => '',
                                                             'description' => 'Some services needs an extra api user'),
+                                       'devicename'  => array('type' => 'varchar', 
+                                                            'length' => 255, 
+                                                            'not null' => true, 
+                                                            'default' => '',
+                                                            'description' => 'Some services needs an extra api devicename to send pushes to'),
                                        'service'      => array('type' => 'varchar', 
                                                             'length' => 255, 
                                                             'not null' => true, 
                                                             'default' => 'pushalot',
-                                                            'description' => 'Service i.e. pushalot, nma'),
+                                                            'description' => 'Service i.e. pushalot, nma, pushover'),
                                        'created'      => array('type' => 'datetime',
                                                             'not null' => true,
                                                             'description' => 'date this record was created'),
