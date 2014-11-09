@@ -126,7 +126,7 @@ class PushnotifysettingsAction extends SettingsAction {
                         // First implementations for pushover. It needs a username and token
                         $this->elementStart('li');
                            $this->element('label', array('for' => 'push_apiuser'),
-                                          _m('API User*'));
+                                          _m('API User'));
                            $this->element('input', array('name' => 'push_apiuser',
                                                          'type' => 'text',
                                                          'id' => 'push_apiuser',
@@ -152,7 +152,7 @@ class PushnotifysettingsAction extends SettingsAction {
                         $this->elementEnd('li');
                         $this->element('p', 'form_guide',
                                      // TRANS: Form guide.
-                                     _m('* You can leave API User and Devicename empty, if not needed. <br> For pushover you can leave devicename empty, if you want to push to all devices.'));
+                                     _m('You can leave API User and Devicename empty, if not needed. For pushover you can leave devicename empty, if you want to push to all devices.'));
                         $this->elementStart('li');
                             $this->element('input', array('type' => 'submit',
                                                           'id' => 'settings_pushnotify_prefs_save',
