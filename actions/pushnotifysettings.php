@@ -152,7 +152,7 @@ class PushnotifysettingsAction extends SettingsAction {
                         $this->elementEnd('li');
                         $this->element('p', 'form_guide',
                                      // TRANS: Form guide.
-                                     _m('* If not needed, keep it empty.'));
+                                     _m('* You can leave API User and Devicename empty, if not needed. <br> For pushover you can leave devicename empty, if you want to push to all devices.'));
                         $this->elementStart('li');
                             $this->element('input', array('type' => 'submit',
                                                           'id' => 'settings_pushnotify_prefs_save',
