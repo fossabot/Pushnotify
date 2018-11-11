@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkromonos%2FPushnotify.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkromonos%2FPushnotify?ref=badge_shield)
+
 Pushnotify
 ==========
 
@@ -8,3 +10,7 @@ If you want to take an own logo for Pushalot: addPlugin('Pushnotify', array('log
 
 You find new settings in:
 Settings -> Push notification
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fkromonos%2FPushnotify.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fkromonos%2FPushnotify?ref=badge_large)
